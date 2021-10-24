@@ -5,8 +5,7 @@ const router = new Router();
 router.prefix('/organizations')
 
 router.post('/', async (ctx) => {
-    console.log(ctx.request.body);
-    ctx.body = 'working';
+    ctx.body = await organization.create(ctx.request.body);
     ctx.status = 200;
     
 });

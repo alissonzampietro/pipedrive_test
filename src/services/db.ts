@@ -11,10 +11,18 @@ const openConnection = async () => {
 }
 
 export const queryBuilder = async (query: string, params: {} = {}) => {
-
     try {
         let db = await openConnection();
         return await db.all(query, params);
+    }catch(error) {
+        throw new Error(error);
+    }
+}
+
+export const findOne = async (query: string, params: {} = {}) => {
+    try {
+        let db = await openConnection();
+        return await db.get(query, params);
     }catch(error) {
         throw new Error(error);
     }

@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "driver": "mysql",
+        "user": {"ENV": "MYSQL_USER"},
+        "password": {"ENV": "MYSQL_PSW"},
+        "host": "localhost",
+        "database": {"ENV": "MYSQL_DATABASE"},
+        "port": {"ENV": "MYSQL_PORT"}
+    },
+    "test": {
+        "driver": "sqlite3",
+        "filename": "./db/database.sqlite3"
+    },
+    "prod": {
+      "driver": "mysql",
+      "user": "root",
+      "password": "root"
+    }
+  }
