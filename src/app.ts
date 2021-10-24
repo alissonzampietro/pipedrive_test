@@ -1,17 +1,8 @@
+require('dotenv').config()
 import Koa from 'koa';
-import Router from 'koa-router';
-
+import KoaLogger from 'koa-logger';
+import allRoutes from './routes';
 export const app = new Koa();
 
-const router = new Router();
-
-app.use(router.routes());
-
-router
-  .get('/', (ctx) => {
-    ctx.body = 'It\'s working';
-  })
-  .post('/organizations', ctx => {
-      ctx.body = ['alisson', 'zampietro'];
-      ctx.status = 200;
-  });
+app.use(KoaLogger());
+app.use(allRoutes());
