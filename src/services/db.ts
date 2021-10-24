@@ -1,24 +1,21 @@
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
 
+sqlite3.verbose();
 
 const openConnection = async () => {
-    return open({
+    return await open({
         filename: __dirname+'/../../db/database.sqlite3',
         driver: sqlite3.Database
     })
 }
 
-export const queryBuilder = async (query: string) => {
-    let db = await openConnection();
+export const queryBuilder = async (query: string, params: {} = {}) => {
 
-    return new Promise<any[]>((resolve, reject) => {
-        db.all(query, {}, (err, rows) => {
-            if(err) {
-                reject(err);
-            }else {
-                resolve(rows);
-            }
-        })
-    });
+    try {
+        let db = await openConnection();
+        return await db.all(query, params);
+    }catch(error) {
+        throw new Error(error);
+    }
 }

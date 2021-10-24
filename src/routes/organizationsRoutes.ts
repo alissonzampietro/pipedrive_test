@@ -1,20 +1,25 @@
 import Router from 'koa-router';
-import { queryBuilder } from '../services/db';
+import * as organization from './../services/organization';
 const router = new Router();
 
 router.prefix('/organizations')
 
-router.post('/', async ctx => {
-    try {
+router.post('/', async (ctx) => {
+    console.log(ctx.request.body);
+    ctx.body = 'working';
+    ctx.status = 200;
+    
+});
 
-        ctx.body = await queryBuilder('SELECT * FROM organizations');
+router.get('/', async ctx => {
+    try {
+        ctx.body = await organization.getAll();
         ctx.status = 200;
     }catch(error) {
         console.log(error);
         ctx.body = error;
         ctx.status = 400;
     }
-});
-
+})
 
 export default router;
