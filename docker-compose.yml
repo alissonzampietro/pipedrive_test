@@ -1,25 +1,21 @@
-version: '3.4'
-
+version: "3.9"
 services:
-  solution:
-    image: solution
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
+  pipedrive-task-service:
+    build: .
+    command: npm run dev
     ports:
+      - 3000:3000
       - 3001:3001
-  database:
-    restart: always
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: "${MYSQL_DATABASE}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PSW}"
-      MYSQL_USER: "${MYSQL_USER}"
-      MYSQL_PASSWORD: "${MYSQL_PSW}"
-    ports:
-      - ${MYSQL_PORT}:3306
+      NODE_ENV: development
+      HTTP_PORT: 3000
+      DEBUG_PORT: 3001
+    restart: unless-stopped
+    volumes:
+      - .:/app/
+    networks:
+      - pipedrive
+
+networks:
+  pipedrive:
+    driver: bridge
