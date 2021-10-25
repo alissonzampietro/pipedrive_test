@@ -6,11 +6,4 @@ describe('Organization test', () => {
     let expectedValue = 'my_organization';
     expect(organization.sanitizeIndex(inputTitle)).toBe(expectedValue);
   });
-
-  test('Test if the relationship sibling is correctly generated', async () => {
-    let inputTitle = 'My Organization';
-    let expectedValue = 'my_organization';
-    expect(organization.sanitizeIndex(inputTitle)).toBe(expectedValue);
-  });
-
 });
