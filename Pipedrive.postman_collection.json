@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "5cfc1bef-fc63-4d21-8578-7a032abd1c3c",
+		"name": "Pipedrive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Organizations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"org_name\": \"Paradise Island 10\",\n    \"daughters\": [\n        {\n            \"org_name\": \"Banana tree\",\n            \"daughters\": [\n                {\n                    \"org_name\": \"Yellow Banana\"\n                },\n                {\n                    \"org_name\": \"Brown Banana\"\n                },\n                {\n                    \"org_name\": \"Black Banana\"\n                }\n            ]\n        },\n        {\n            \"org_name\": \"Big banana tree\",\n            \"daughters\": [\n                {\n                    \"org_name\": \"Yellow Banana\"\n                },\n                {\n                    \"org_name\": \"Brown Banana\"\n                },\n                {\n                    \"org_name\": \"Green Banana\"\n                },\n                {\n                    \"org_name\": \"Black Banana\",\n                    \"daughters\": [\n                        {\n                            \"org_name\": \"Phoneutria Spider\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "0.0.0.0:3000/organizations",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "3000",
+					"path": [
+						"organizations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Organizations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "0.0.0.0:3000/organizations?name=Yellow Banana",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "3000",
+					"path": [
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Yellow Banana"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
