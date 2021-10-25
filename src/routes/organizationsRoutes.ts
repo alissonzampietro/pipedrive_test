@@ -5,8 +5,13 @@ const router = new Router();
 router.prefix('/organizations')
 
 router.post('/', async (ctx) => {
-    const response = await organization.create(ctx.request.body);
-    ctx.body = await organization.getByID(response.lastID);
+    try {
+        await organization.create(ctx.request.body);
+        ctx.status = 201;
+    }catch(error) {
+        ctx.body = error;
+        ctx.status = 422;
+    }
 });
 
 router.get('/', async ctx => {

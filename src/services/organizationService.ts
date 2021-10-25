@@ -25,7 +25,9 @@ export const handleAssociations = async (daughters: Array<OrganizationPayload>, 
             daughtersList.push(response.id);
         }
 
+        await relationshipService.associateSiblings(daughtersList);
         await relationshipService.associateDaugther(daughtersList, fatherId);
+
     }catch(error) {
         throw new Error(error);
     }

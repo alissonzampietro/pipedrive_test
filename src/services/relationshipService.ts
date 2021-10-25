@@ -1,24 +1,43 @@
-import { Organization } from "../models/organization"
+// import { Organization } from "../models/organization"
 import { queryBuilder } from './dbService';
 
+
+type relationship = {
+    source_id: number;
+    target_id: number;
+    relationship: number;
+}
 //TODO: finish
-export const associateSiblings = async (org: Organization, siblingId:number) => {
-    try {
-        await queryBuilder('INSERT INTO relationships_organizations(source_id, target_id, relationship_type_id) VALUES($source_id, $target_id, $relationShip)', {
-            "$source_id": org.id, 
-            "$target_id": siblingId, 
-            "$relationShip": 3
+export const associateSiblings = async (sibling: Array<number>) => {
+    const associations = generateSiblingRelationship(sibling);
+
+    associations.map(async item => {
+        await queryBuilder('INSERT OR IGNORE INTO relationships_organizations(id, source_id, target_id, relationship_type_id) VALUES($id, $source_id, $target_id, $relationShip)', {
+            "$source_id": item.source_id, 
+            "$target_id": item.target_id, 
+            "$relationShip": item.relationship,
+            "$id": null
         })
-    
-        await queryBuilder('INSERT INTO relationships_organizations(source_id, target_id, relationship_type_id) VALUES($source_id, $target_id, $relationShip)', {
-            "$source_id": siblingId, 
-            "$target_id": org.id, 
-            "$relationShip": 3
-        })
-    }catch(error) {
-        throw new Error(error);
+    })
+
+}
+
+export const generateSiblingRelationship = (sibling: Array<number>):Array<relationship> => {
+    const associationMap = [];
+
+    for(let i = 0; i < sibling.length;i++) {
+        for(let j = 0; j < sibling.length;j++) {
+            if(sibling[i] != sibling[j]) {
+                associationMap.push({
+                    source_id: sibling[i],
+                    target_id: sibling[j],
+                    relationship: 3
+                })
+            }
+        }
     }
 
+    return associationMap;
 }
 
 export const associateDaugther = async (sibling: Array<number>, fatherId: number) => {
@@ -27,14 +46,14 @@ export const associateDaugther = async (sibling: Array<number>, fatherId: number
         let siblingSize = sibling.length;
 
         for(let i = 0; i < siblingSize;i++) {
-            await queryBuilder('INSERT INTO relationships_organizations(id, source_id, target_id, relationship_type_id) VALUES($id, $source_id, $target_id, $relationShip)', {
+            await queryBuilder('INSERT OR IGNORE INTO relationships_organizations(id, source_id, target_id, relationship_type_id) VALUES($id, $source_id, $target_id, $relationShip)', {
                 "$source_id": sibling[i], 
                 "$target_id": fatherId, 
                 "$relationShip": 2,
                 "$id": null
             })
         
-            await queryBuilder('INSERT INTO relationships_organizations(id, source_id, target_id, relationship_type_id) VALUES($id, $source_id, $target_id, $relationShip)', {
+            await queryBuilder('INSERT OR IGNORE INTO relationships_organizations(id, source_id, target_id, relationship_type_id) VALUES($id, $source_id, $target_id, $relationShip)', {
                 "$source_id": fatherId, 
                 "$target_id": sibling[i], 
                 "$relationShip": 1,
