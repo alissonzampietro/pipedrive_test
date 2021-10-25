@@ -8,12 +8,6 @@ create table organizations (
 
 CREATE INDEX org_index_name ON organizations (index_name);
 
-create table relationships_types (
-	id integer auto_increment not null primary key,
-	type varchar(60) UNIQUE not null,
-	created_at default CURRENT_TIMESTAMP,
-	updated_at default CURRENT_TIMESTAMP
-);
 
 create table relationships_organizations (
 	id integer not null primary key,
@@ -25,5 +19,15 @@ create table relationships_organizations (
     FOREIGN KEY (target_id)
        REFERENCES organizations (id),
     FOREIGN KEY (relationship_type_id)
-       REFERENCES relationships_types (id)
+       REFERENCES relationships_types (id),
+    CONSTRAINT relation_group
+    	UNIQUE (source_id, target_id, relationship_type_id) ON CONFLICT REPLACE
+);
+
+
+create table relationships_types (
+	id integer auto_increment not null primary key,
+	type varchar(60) UNIQUE not null,
+	created_at default CURRENT_TIMESTAMP,
+	updated_at default CURRENT_TIMESTAMP
 );
