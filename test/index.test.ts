@@ -5,6 +5,13 @@ describe('App test', () => {
     const result = await request.get('/');
 
     expect(result.status).toBe(200);
-    expect(result.text).toBe('Hello World');
+    expect(result.text).toBe("It's working");
+  });
+
+  test('Should response organization with 200', async () => {
+    const result = await request.get('/');
+
+    expect(result.status).toBe(200);
+    expect(result.text).toBe("It's working");
   });
 });

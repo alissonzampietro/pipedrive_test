@@ -13,7 +13,7 @@ const openConnection = async () => {
 export const queryBuilder = async (query: string, params: {} = {}) => {
     try {
         let db = await openConnection();
-        return await db.all(query, params);
+        return await db.run(query, params);
     }catch(error) {
         throw new Error(error);
     }
@@ -23,6 +23,15 @@ export const findOne = async (query: string, params: {} = {}) => {
     try {
         let db = await openConnection();
         return await db.get(query, params);
+    }catch(error) {
+        throw new Error(error);
+    }
+}
+
+export const findAll = async (query: string, params: {} = {}) => {
+    try {
+        let db = await openConnection();
+        return await db.all(query, params);
     }catch(error) {
         throw new Error(error);
     }
