@@ -1,12 +1,6 @@
 // import { Organization } from "../models/organization"
 import { queryBuilder } from './dbService';
-
-
-type relationship = {
-    source_id: number;
-    target_id: number;
-    relationship: number;
-}
+import {relationship} from './../models/relationship';
 //TODO: finish
 export const associateSiblings = async (sibling: Array<number>) => {
     const associations = generateSiblingRelationship(sibling);
