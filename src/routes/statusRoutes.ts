@@ -6,4 +6,4 @@ router.get('/', ctx => {
     ctx.body = 'It\'s working';
 })
 
-export default router;
+export default router.routes();

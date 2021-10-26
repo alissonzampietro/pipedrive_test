@@ -4,6 +4,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile-build
+    volumes:
+      - myvolume:/app
   pipedrive-task-service:
     build: .
     command: npm run dev
@@ -16,11 +18,14 @@ services:
       DEBUG_PORT: 3001
     restart: unless-stopped
     volumes:
-      - .:/app/
+      - myvolume:/app/
     depends_on:
       - pipedrive-build
     networks:
       - pipedrive
+
+volumes:
+  myvolume:
 
 networks:
   pipedrive:

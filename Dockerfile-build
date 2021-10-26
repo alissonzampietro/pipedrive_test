@@ -1,5 +1,6 @@
 FROM node:14-alpine
 WORKDIR /app
 VOLUME ./:/app
-COPY package.json /app/package.json
+COPY . /app/
 RUN npm install --development
+RUN ls -la /app/src/bootstrap

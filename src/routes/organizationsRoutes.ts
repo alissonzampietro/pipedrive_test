@@ -2,8 +2,6 @@ import Router from 'koa-router';
 import * as organization from './../services/organizationService';
 const router = new Router();
 
-router.prefix('/organizations')
-
 router.post('/', async (ctx) => {
     try {
         await organization.create(ctx.request.body);
@@ -31,4 +29,4 @@ router.get('/', async ctx => {
     ctx.status = 404;
 })
 
-export default router;
+export default router.routes();

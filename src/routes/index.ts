@@ -1,10 +1,10 @@
-import combineRouters from 'koa-combine-routers'
+import Router from 'koa-router';
 import statusRoutes from './statusRoutes'
 import organizations from './organizationsRoutes'
 
-const router = combineRouters(
-  statusRoutes,
-  organizations
-)
+const apiRouter = new Router();
 
-export default router
+apiRouter.use('/', statusRoutes);
+apiRouter.use('/organizations', organizations);
+
+export default apiRouter.routes();

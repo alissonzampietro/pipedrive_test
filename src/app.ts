@@ -6,6 +6,6 @@ import KoaLogger from 'koa-logger';
 import allRoutes from './routes';
 export const app = new Koa();
 app.use(errorHandler);
-app.use(bodyParser())
 app.use(KoaLogger());
-app.use(allRoutes());
+app.use(bodyParser());
+app.use(allRoutes);
