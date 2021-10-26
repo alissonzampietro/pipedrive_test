@@ -1,5 +1,9 @@
 version: "3.9"
 services:
+  pipedrive-build:
+    build:
+      context: ./
+      dockerfile: Dockerfile-build
   pipedrive-task-service:
     build: .
     command: npm run dev
@@ -13,6 +17,8 @@ services:
     restart: unless-stopped
     volumes:
       - .:/app/
+    depends_on:
+      - pipedrive-build
     networks:
       - pipedrive
 
