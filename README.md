@@ -34,5 +34,4 @@ When the API receives a request to create a new oganization, the following steps
  - Associate Daughters
  - Populate daughters organizations recursively
 
-## Track the evolution
-You can check the Project Evolution using the git commands. I've logged all progress.
+[Business implementations].(https://whimsical.com/pipedrive-LE2j6LCBgMsewQx6KBE8FY)
