@@ -34,4 +34,4 @@ When the API receives a request to create a new oganization, the following steps
  - Associate Daughters
  - Populate daughters organizations recursively
 
-[Business implementations].(https://whimsical.com/pipedrive-LE2j6LCBgMsewQx6KBE8FY)
+[Business implementations](https://whimsical.com/pipedrive-LE2j6LCBgMsewQx6KBE8FY)
